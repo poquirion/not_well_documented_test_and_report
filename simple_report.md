@@ -208,7 +208,31 @@ Transfer speed from Beluga/Narval with Globus (Typical MOH dataset)
 
 # SSD CephFS
 
-Test ran on a single node (node9, host id 0c6d2f5d2500dfe8c81476929500695f14b5ca47804df49ef4c6ac52) for 15 minutes with 5 minutes breaks:
+Test ran on a single node (node9) for 15 minutes with 5 minutes breaks, with the followint fio config
+
+```
+[global]
+iodepth_batch_complete_max=64
+iodepth_batch_submit=64
+group_reporting
+verify=0
+time_based=1
+ramp_time=6s 
+directory=${d}
+ioengine=libaio
+iodepth=64 
+direct=1 
+size=10G 
+
+[the_test]
+runtime=900s
+rw=${rw}
+bs=4096k 
+numjobs=${n}
+name=dummy-file
+```
+
+
 
 
 <p style="text-align: center;">READ</p>
@@ -236,42 +260,40 @@ Test ran on a single node (node9, host id 0c6d2f5d2500dfe8c81476929500695f14b5ca
 |EC 4+2|  30-08 17:51  | 1 | 64 |
 
 Test ran on 2 to 32 nodes and 1 Tread per node for 10 minutes with a 3 minutes pause. Nodes are added in this order:
-
-|Node Name| Host id|
-|---:|:---|
-node9 | 0c6d2f5d2500dfe8c81476929500695f14b5ca47804df49ef4c6ac52
-node8 | 800ed6b10026a5ebd165200d850049cee2ef07c57d6c28359a08661f
-node7 | 4c5fb320dbd071d0163432c6af32b481509cfaa15cce0b4ebb975485
-node6 | 4e22d0854fa01d773f1655114718ef9614fa6c73c3ed8f9e2c5e6b57
-node5 | 41e505f3448e8fa4e2321107c86058f7dc12b54d11c06dca7eab8311
-node4 | 64ba97b4421a066331177bcb0a657de0f34be89f32c8c1c900b15584
-node3 | ac98835875bbfc4b9ce7919f8fcfeaf0e39d77d07a73e7a9073328aa
-node2 | 03e6a328072f4e9c59fc325e4e518103f8a9ca9ee000c3813f284069
-node18 | f614bc934c6a49e33590190a58d4bc91eabaf0288594549a0ad0ff7a
-node17 | df3749e19b4eebb11c25b8d1664af2dbca3cbbe627b71e7f15ae334e
-node16 | 1bcec09bacbc04583277c79fa6911e9067db082db7b8a365cf754d1c
-node15 | bdd47a4a49671b909a94030d9ff34860fe2d1e656184c56a09643076
-node14 | c4037ad7f2c5d35bf3b94b3628e53480e9dd06cb9b6cbea30b58e5ce
-node13 | 02abdd87712ed23cbac2e796215aba676079d1f6f4339466b9a3aa19
-node12 | 48804e9404364a355ea09b3042aefb50910e84481d5fd323cc828a52
-node11 | 864a502f40d44c42eb54d8a2c1704868e42c09dca4dcf9667fa2a8dc
-node10 | 7ec4d06cc78268163603a190bca1c841c0c46b10897967b2f8b62abd
-node1 | c46d5f626dd15af4ad65f1d2a70194a5e1bebe17e14bbaadacfe68d6
-hm-node8 | ae81cc92972d50014cd88ae14571bbb43d896ed49494b18560190f09
-hm-node6 | b58fda7fa08e35cd1a9895a18ea8f265aa5366366770089e6784c3bb
-hm-node5 | 15e2984ad6bc2b8caf7a81ddd07f1afd98c81dabe9703ab37ebdc72c
-hm-node4 | 122955d3cf4b7a90f61dddd5793d1ca330fe450dc63beb2f4463fe7b
-hm-node3 | 5430aaef93ccc64dfdb88f27736394176b35973e28332882e067d2bf
-hm-node2 | 09094aa408a919f99a979415ed97a4b8b7b89edb4413c7b974174b93
-hm-node15 | 7b0f1c84906d6d64f80105e55a25479768c0310b15e1dd60824f4e97
-hm-node14 | d48ce42d5e3d9bbc39aedf3dff8f50ddf69f45e1e11e3d3cf3deba2a
-hm-node13 | 89b00ece80005128fb6e7af0e96cfafac49154879f595031b43fe901
-hm-node12 | 58a64b10f2d796103e81201ff2a8c06fa10f63615878e95d26ef8416
-hm-node11 | 67aebb2a3d357384bb27758def467d6c8008548e748fe7a6ae74ceaf
-hm-node10 | 72b900cb61a44edbe32589717acd0c17ff47023175f56b3d81e3e38c
-hm-node1 | 86cda01ebf2870b37f6d34fe1a5ffecd64912dc3a18be11a2095f4ef
-gd-node1 | 72915ecd0680bd6974fb03866fa40ea0a276ddec840d0a609e559f71
-
+```
+node9
+node8 
+node7 
+node6 
+node5 
+node4 
+node3 
+node2
+node18 
+node17 
+node16 
+node15 
+node14 
+node13 
+node12 
+node11 
+node10 
+node1 
+hm-node8 
+hm-node6 
+hm-node5 
+hm-node4 
+hm-node3 
+hm-node2 
+hm-node15 
+hm-node14
+hm-node13
+hm-node12
+hm-node11
+hm-node10
+hm-node1 
+gd-node1
+```
 
 | FS type |start time | Node | Threads per node|
 |---:|-------------|:-------------:|:----:|
